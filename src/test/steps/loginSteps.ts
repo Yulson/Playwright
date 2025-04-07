@@ -1,4 +1,8 @@
-import { Given, When, Then } from '@cucumber/cucumber';
+import { test, expect } from '@playwright/test';
+import { Given, When, Then} from '@cucumber/cucumber';
+import { chromium, Page, Browser, Expect } from '@playwright/test';
+import { HomePage } from '../../../pages/homePage.ts';
+
 
 Given('User navigates to the practice application', async function (){
   console.log("one");
@@ -27,3 +31,21 @@ Then('Login should be success',async function () {
 Then('Login should be fail',async function () {
   console.log("seven");
 });
+
+
+Given ('User is on HomepageGuest', async function () {
+  this.homePage = new HomePage(this.page);
+  await this.homePage.navigate();
+  await this.homePage.verifyAllElementsVisible();
+  return 'pending'
+});
+
+When ('User clicks Login button', async function() {
+  await this.homePage.clickLoginButton();
+  console.log("one")
+});
+
+When ('User clicks SignUp link', async function() {
+  await this.signInPage.clickSignUpLink();
+  console.log("two")
+})
