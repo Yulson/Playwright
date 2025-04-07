@@ -3,16 +3,17 @@
         "formatOptions": {
             "snippetInterface": "async-await"
         },
-        "publishQuiet": true,
         "dryRun": false,
         "paths": [
             "src/test/features/"
         ],
-        "require": [
-            "src/test/steps/*.ts"
+        "import": [
+            "src/test/steps/*.ts",
+            "pages/*.ts"
         ],
-        "requireModule": [
+        "importModule": [
             "ts-node/register"
         ]
+
     }
 }
