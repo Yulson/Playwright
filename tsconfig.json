@@ -10,5 +10,5 @@
       "resolveJsonModule": true,
       "skipLibCheck": true
     },
-    "include": ["src/test/steps/*.ts", "pages/*.ts",  "src/test/features/*.ts"]
+    "include": ["src/test/steps/*.ts", "pages/*.ts",  "src/test/features/*.ts", "src/hooks/hooks.ts"]
   }

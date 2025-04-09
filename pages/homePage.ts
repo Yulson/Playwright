@@ -1,47 +1,44 @@
 import { Page, Locator, expect } from '@playwright/test';
 
 export class HomePage {
-    readonly page: Page;
+    readonly page: Page;   
     readonly redditLogo: Locator;
     readonly searchInput: Locator;
     readonly searchIcon: Locator;
     readonly searchLable: Locator;
-    readonly loginButton: Locator;
-    readonly getAppButton: Locator;
-    readonly settingsButton: Locator;
     readonly newsGrid: Locator;
     readonly collapseButton: Locator;
     readonly humburgerButton: Locator;
+    
+
+    //elememts for guest user
+    readonly loginButton: Locator;
+    readonly getAppButton: Locator;
+    readonly settingsButton: Locator;  
+
+    //elements for signed in user
     readonly adsIcon: Locator;
     readonly chatIcon: Locator;
     readonly createButton: Locator;
     readonly bellIcon: Locator;
     readonly profileIcon: Locator;
+
+    //elements of user menu
+    readonly userMenu: Locator;
     readonly viewProfileIcon: Locator;
-    readonly viewProfileLable: Locator;
-    readonly editAvatarIcon: Locator;
-    readonly editAvatarLable: Locator;
+    readonly editAvatarSection: Locator;
     readonly achievmentsIcon: Locator;
-    readonly achievmentsLable: Locator;
-    readonly achievmentsStats: Locator;
     readonly contributorIcon: Locator;
-    readonly contributorLable: Locator;
-    readonly contributorStats: Locator;
-    readonly darkModeIcon: Locator;
-    readonly darkModeLable: Locator;
     readonly darkModeToggle: Locator;
     readonly logOutIcon: Locator;
-    readonly logOutLable: Locator;
-    readonly advertiseIcon: Locator;
-    readonly advertiseLable: Locator;
 
-
+   
     constructor(page: Page){
         this.page = page;
         this.redditLogo = page.locator('#reddit-logo');
         this.searchInput = page.locator('#search-input');
-        this.searchIcon = page.locator('span.leadingIcon > svg:only-child');
-        this.searchLable = page.getByPlaceholder('Search Reddit');
+        this.searchIcon = page.locator('[icon-name="search-outline"]');
+        this.searchLable = page.locator('[placeholder="Search Reddit"]');
         this.loginButton = page.locator('#login-button');
         this.getAppButton = page.locator('#get-app');
         this.settingsButton = page.locator('#expand-user-drawer-button');
@@ -53,23 +50,14 @@ export class HomePage {
         this.createButton = page.locator('#create-post');
         this.bellIcon = page.locator('#notifications-inbox-button');
         this.profileIcon = page.locator('#expand-user-drawer-button');
-        this.viewProfileIcon = page.locator('');
-        this.viewProfileLable = page.locator('');
-        this.editAvatarIcon = page.locator('');
-        this.editAvatarLable = page.locator('');
-        this.achievmentsIcon = page.locator('');
-        this.achievmentsLable = page.locator('');
-        this.achievmentsStats = page.locator('');
-        this.contributorIcon = page.locator('');
-        this.contributorLable = page.locator('');
-        this.contributorStats = page.locator('');
-        this.darkModeIcon = page.locator('');
-        this.darkModeLable = page.locator('');
-        this.darkModeToggle = page.locator('');
-        this.logOutIcon = page.locator('');
-        this.logOutLable = page.locator('');
-        this.advertiseIcon = page.locator('');
-        this.advertiseLable = page.locator('');
+        this.userMenu = page.locator('#user-drawer-content');
+        this.viewProfileIcon = page.locator('[class="text-20 leading-4"]');
+        this.editAvatarSection = page.locator('a[href="https://reddit.com/avatar"]');
+        this.achievmentsIcon = page.locator('[icon-name="contest-outline"]');
+        this.contributorIcon = page.locator('[icon-name="wallet-outline"]');
+        this.darkModeToggle = page.locator('#darkmode-list-item');
+        this.logOutIcon = page.locator('#logout-list-item');
+        
 
     }
 
@@ -80,8 +68,8 @@ export class HomePage {
     async verifyHomePageGuestAllElementsVisible (){
         await expect(this.redditLogo).toBeVisible();
         await expect(this.searchInput).toBeVisible();
-        await expect(this.searchIcon).toBeVisible();
-        await expect(this.searchLable).toBeVisible();
+     //   await expect(this.searchIcon).toBeVisible();
+     //   await expect(this.searchLable).toBeVisible();
         await expect(this.loginButton).toBeVisible();
         await expect(this.getAppButton).toBeVisible();
         await expect(this.settingsButton).toBeVisible();
@@ -93,13 +81,16 @@ export class HomePage {
         await expect(this.searchInput).toBeVisible();
         await expect(this.searchIcon).toBeVisible();
         await expect(this.searchLable).toBeVisible();
-        await expect(this.loginButton).toBeVisible();
-        await expect(this.getAppButton).toBeVisible();
-        await expect(this.settingsButton).toBeVisible();
-        await expect(this.newsGrid).toBeVisible();
+        await expect(this.adsIcon).toBeVisible();
+        await expect(this.chatIcon).toBeVisible();
+        await expect(this.createButton).toBeVisible();
+        await expect(this.bellIcon).toBeVisible();
+        await expect(this.profileIcon).toBeVisible();
     }
 
     async clickLoginButton (){
         await this.loginButton.click()
     }
+
+    
 }

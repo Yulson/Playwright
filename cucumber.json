@@ -9,7 +9,8 @@
         ],
         "import": [
             "src/test/steps/*.ts",
-            "pages/*.ts"
+            "pages/*.ts",
+            "src/hooks/hooks.ts"
         ],
         "importModule": [
             "ts-node/register"
