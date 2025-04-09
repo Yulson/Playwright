@@ -1,19 +1,16 @@
 import { Page, Locator, expect } from '@playwright/test';
 
-export class SignInPage {
+export class LoginPage {
     readonly page: Page;
-    readonly redditLogo: Locator; 
+    readonly redditLogo: Locator;
     readonly loginHeader: Locator;
     readonly termsOfUse1: Locator;
     readonly termsOfUse2: Locator;
     readonly userAgreementLink: Locator;
     readonly privacyPolicyLink: Locator;
     readonly phoneNumberIcon: Locator;
-    readonly phoneNumberButton: Locator;
-    readonly phoneNumberText: Locator;
     readonly googleIcon: Locator;
-    readonly googleButton: Locator;
-    readonly googleText: Locator;
+    readonly appleButton: Locator;
     readonly emailInputField: Locator;
     readonly passwordInputField: Locator;
     readonly forgotPasswordLink: Locator;
@@ -24,24 +21,21 @@ export class SignInPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.redditLogo = page.locator('.h-header-large flex items-center');
+        this.redditLogo = page.locator('[class="hidden s:flex items-center"]');
         this.loginHeader = page.locator('');
-        this.termsOfUse1 = page.getByText(' By continuing, you agree to our ');
+        this.termsOfUse1 = page.locator('');
         this.termsOfUse2 = page.locator('');
-        this.userAgreementLink = page.locator('');
-        this.privacyPolicyLink = page.locator('');
-        this.phoneNumberIcon = page.locator('');
-        this.phoneNumberText = page.locator('');
-        this.phoneNumberButton = page.locator('');
-        this.googleIcon = page.locator('');
-        this.googleText = page.locator('');
-        this.googleButton = page.locator('');
+        this.userAgreementLink = page.locator('a[href="https://www.redditinc.com/policies/user-agreement"]');
+        this.privacyPolicyLink = page.locator('a[href="https://www.redditinc.com/policies/privacy-policy"]');
+        this.phoneNumberIcon = page.locator('[icon-name="phone-outline"]');
+        this.googleIcon = page.locator('[class="nsm7Bb-HzV7m-LgbsSe-Bz112c"]');
+        this.appleButton = page.locator('[aria-label="Sign in with Apple"]');
         this.emailInputField = page.locator('#login-username');
         this.passwordInputField = page.locator('#login-password');
-        this.forgotPasswordLink = page.locator('');
-        this.newToRedditLable = page.locator('');
-        this.signUpLink = page.locator('');
-        this.loginButton = page.locator('');
+        this.forgotPasswordLink = page.locator('[noun="forgot_password"]');
+        this.newToRedditLable = page.locator('[class="lg:mt-sm mt-md text-14"]');
+        this.signUpLink = page.locator('[step="register"]');
+        this.loginButton = page.locator('.w-100');
     }
 
     async navigate() {
@@ -56,11 +50,7 @@ export class SignInPage {
         await expect(this.userAgreementLink).toBeVisible();
         await expect(this.privacyPolicyLink).toBeVisible();
         await expect(this.phoneNumberIcon).toBeVisible();
-        await expect(this.phoneNumberText).toBeVisible();
-        await expect(this.phoneNumberButton).toBeVisible();
         await expect(this.googleIcon).toBeVisible();
-        await expect(this.googleText).toBeVisible();
-        await expect(this.googleButton).toBeVisible();
         await expect(this.emailInputField).toBeVisible();
         await expect(this.passwordInputField).toBeVisible();
         await expect(this.forgotPasswordLink).toBeVisible();

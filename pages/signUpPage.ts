@@ -22,6 +22,9 @@ export class SignUpPage {
     readonly continueButton: Locator;
     readonly continueButtonLable: Locator;
     readonly closeIcon: Locator;
+    readonly skipButton: Locator;
+    readonly passwordInputField: Locator;
+    readonly toastMessage: Locator;
 
     
     
@@ -41,15 +44,38 @@ export class SignUpPage {
     this.googleText = page.locator('#button-label');
     this.appleButton = page.locator('');
     this.appleText = page.locator('');
-    this.emailInputField = page.locator('#register-email');
+    this.emailInputField = page.locator('#register-email input');
     this.alreadyRedditorText = page.locator('');
     this.logInLink = page.locator('');
-    this.continueButton = page.locator('');
+    this.continueButton = page.locator('[noun="register"] .continue');
     this.continueButtonLable = page.locator('');
     this.closeIcon = page.locator('#auth-flow-modal-close-btn');
+    this.skipButton = page.locator('[name="skip"]');
+    this.passwordInputField = page.locator('#register-password input');
+    this.toastMessage = page.locator('[slot="action"] [icon-name="close-outline"]');
     }
 
     async navigate (){
         await this.page.goto('https://www.reddit.com/login/');
+    }
+
+    async enterValidEmail(email: string){
+        await this.emailInputField.fill(email);
+    }
+
+    async clickContinue (){
+        await this.continueButton.click();
+    }
+
+    async clickSkip (){
+        await this.skipButton.click();
+    }
+
+    async enterPassword (password: string){
+        await this.passwordInputField.fill(password);
+    }
+
+    async closeToastMessage (){
+        await this.toastMessage.click();
     }
 }
