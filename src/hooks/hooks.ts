@@ -3,6 +3,8 @@ import { chromium,  Browser, Page } from "playwright";
 import { pageFixture } from "./pageFixture.ts";
 import { HomePage } from '../../pages/homePage.ts';
 import { LoginPage } from '../../pages/loginPage.ts';
+import { SignUpPage } from "../../pages/signUpPage.ts";
+import { PostDetailsPage } from "../../pages/postDetailsPage.ts";
 
 let page: Page;
 let browser: Browser;
@@ -18,6 +20,8 @@ Before ({ timeout: 10000 }, async function () {
     // Initialize and attach Page Objects to `this`
     this.homePage = new HomePage(page);
     this.loginPage = new LoginPage(page);
+    this.signUpPage = new SignUpPage(page);
+    this.postDetailsPage = new PostDetailsPage(page);
 });
 
 After(async function () {

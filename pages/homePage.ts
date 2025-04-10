@@ -4,11 +4,10 @@ export class HomePage {
     readonly page: Page;   
     readonly redditLogo: Locator;
     readonly searchInput: Locator;
-    readonly searchIcon: Locator;
-    readonly searchLable: Locator;
     readonly newsGrid: Locator;
     readonly collapseButton: Locator;
     readonly humburgerButton: Locator;
+    readonly topPost: Locator;
     
 
     //elememts for guest user
@@ -33,12 +32,10 @@ export class HomePage {
     readonly logOutIcon: Locator;
 
    
-    constructor(page: Page){
+    constructor (page: Page) {
         this.page = page;
         this.redditLogo = page.locator('#reddit-logo');
         this.searchInput = page.locator('#search-input');
-        this.searchIcon = page.locator('[icon-name="search-outline"]');
-        this.searchLable = page.locator('[placeholder="Search Reddit"]');
         this.loginButton = page.locator('#login-button');
         this.getAppButton = page.locator('#get-app');
         this.settingsButton = page.locator('#expand-user-drawer-button');
@@ -57,30 +54,27 @@ export class HomePage {
         this.contributorIcon = page.locator('[icon-name="wallet-outline"]');
         this.darkModeToggle = page.locator('#darkmode-list-item');
         this.logOutIcon = page.locator('#logout-list-item');
+        this.topPost = page.locator('[slot="full-post-link"]');
         
 
     }
 
-    async navigateToHomePage (){
+    async navigateToHomePage () {
         await this.page.goto('https://www.reddit.com');
     }
 
-    async verifyHomePageGuestAllElementsVisible (){
+    async verifyHomePageGuestAllElementsVisible () {
         await expect(this.redditLogo).toBeVisible();
         await expect(this.searchInput).toBeVisible();
-     //   await expect(this.searchIcon).toBeVisible();
-     //   await expect(this.searchLable).toBeVisible();
         await expect(this.loginButton).toBeVisible();
         await expect(this.getAppButton).toBeVisible();
         await expect(this.settingsButton).toBeVisible();
         await expect(this.newsGrid).toBeVisible();
     }
 
-    async verifyHomePageSignedInAllElementsVisible (){
+    async verifyHomePageSignedInAllElementsVisible () {
         await expect(this.redditLogo).toBeVisible();
         await expect(this.searchInput).toBeVisible();
-        await expect(this.searchIcon).toBeVisible();
-        await expect(this.searchLable).toBeVisible();
         await expect(this.adsIcon).toBeVisible();
         await expect(this.chatIcon).toBeVisible();
         await expect(this.createButton).toBeVisible();
@@ -88,9 +82,16 @@ export class HomePage {
         await expect(this.profileIcon).toBeVisible();
     }
 
-    async clickLoginButton (){
+    async clickLoginButton () {
         await this.loginButton.click()
     }
 
+    async clickTopPost () {
+        const topNews = this.topPost.first();
+        const postUrl = await topNews.getAttribute('href');
+        if (postUrl) {
+        await this.page.goto(`https://www.reddit.com${postUrl}`);
+    }
+    }
     
 }

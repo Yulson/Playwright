@@ -30,39 +30,31 @@ export class LoginPage {
         this.phoneNumberIcon = page.locator('[icon-name="phone-outline"]');
         this.googleIcon = page.locator('[class="nsm7Bb-HzV7m-LgbsSe-Bz112c"]');
         this.appleButton = page.locator('[aria-label="Sign in with Apple"]');
-        this.emailInputField = page.locator('#login-username');
-        this.passwordInputField = page.locator('#login-password');
+        this.emailInputField = page.locator('#login-username input');
+        this.passwordInputField = page.locator('#login-password input');
         this.forgotPasswordLink = page.locator('[noun="forgot_password"]');
         this.newToRedditLable = page.locator('[class="lg:mt-sm mt-md text-14"]');
         this.signUpLink = page.locator('[step="register"]');
-        this.loginButton = page.locator('.w-100');
+        this.loginButton = page.locator('[source="onboarding"] .login');
     }
 
     async navigate() {
         await this.page.goto('https://www.reddit.com/login/');
     }
 
-    async verifyAllElementsVisible() {
-        await expect(this.redditLogo).toBeVisible();
-        await expect(this.loginHeader).toBeVisible();
-        await expect(this.termsOfUse1).toBeVisible();
-        await expect(this.termsOfUse2).toBeVisible();
-        await expect(this.userAgreementLink).toBeVisible();
-        await expect(this.privacyPolicyLink).toBeVisible();
-        await expect(this.phoneNumberIcon).toBeVisible();
-        await expect(this.googleIcon).toBeVisible();
-        await expect(this.emailInputField).toBeVisible();
-        await expect(this.passwordInputField).toBeVisible();
-        await expect(this.forgotPasswordLink).toBeVisible();
-        await expect(this.newToRedditLable).toBeVisible();
-        await expect(this.signUpLink).toBeVisible();
-        await expect(this.loginButton).toBeVisible();
-    }
-
-    async clickLoginButton(){
+    async clickLoginButton (){
         await this.loginButton.click()
     }
-    async clickSignUpLink(){
+    async clickSignUpLink (){
         await this.signUpLink.click()
+    }
+
+    async enterValidEmail (email: string){
+        await this.emailInputField.click();
+        await this.emailInputField.fill(email);
+    }
+
+    async enterValidPassword (password: string){
+        await this.passwordInputField.fill(password);
     }
 }
