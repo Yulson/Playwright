@@ -5,6 +5,7 @@ import { HomePage } from '../../pages/homePage.ts';
 import { LoginPage } from '../../pages/loginPage.ts';
 import { SignUpPage } from "../../pages/signUpPage.ts";
 import { PostDetailsPage } from "../../pages/postDetailsPage.ts";
+import { CommunityPage } from "../../pages/communityDetailsPage.ts";
 
 let page: Page;
 let browser: Browser;
@@ -22,6 +23,7 @@ Before ({ timeout: 10000 }, async function () {
     this.loginPage = new LoginPage(page);
     this.signUpPage = new SignUpPage(page);
     this.postDetailsPage = new PostDetailsPage(page);
+    this.communityDetailsPage = new CommunityPage(page);
 });
 
 After(async function () {

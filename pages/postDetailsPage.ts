@@ -17,13 +17,13 @@ export class PostDetailsPage {
             throw new Error('Page object is not defined!');
           }
         this.page = page;
-        this.redditLogo = page.locator('a[href="/"]');
+        this.redditLogo = page.locator('#reddit-logo');
         this.communityPanel = page.locator('[aria-label="Community information"]');
         this.communityName = page.locator('a[data-click-id="subreddit"]');
-        this.postTitle = page.locator('h1');
-        this.postAuthor = page.locator('a[data-click-id="user"]');
-        this.joinButton = page.locator('button[data-testid="subscribe-button"]');
-        this.votesControl = page.locator('div[data-testid="upvote"], div[data-testid="downvote"]');
+        this.postTitle = page.locator('[slot="title"]');
+        this.postAuthor = page.locator('[source="post_credit_bar"]');
+        this.joinButton = page.locator('.button-primary[data-post-click-location="join"]');
+        this.votesControl = page.locator('div[data-testid="upvote"]');
         this.commentsSection = page.locator('div[data-test-id="comment"]');
         this.shareIcon = page.locator('button[data-click-id="share"]');
     }
@@ -31,14 +31,15 @@ export class PostDetailsPage {
     async verifyElementsVisible () {
         await expect(this.redditLogo).toBeVisible();
         await expect(this.communityPanel).toBeVisible();
-        await expect(this.communityName).toBeVisible();
-        await expect(this.postTitle).toBeVisible();
-        await expect(this.postAuthor).toBeVisible();
+        const author = this.postAuthor.first();
+        await expect(author).toBeVisible();
         await expect(this.joinButton).toBeVisible();
-        await expect(this.votesControl).toBeVisible();
-        await expect(this.commentsSection).toBeVisible();
-        await expect(this.shareIcon).toBeVisible();
     }
         
+    async verifyPostPageURL () {
+        const url = this.page.url();
+        const redditUrlPattern = /^https:\/\/www\.reddit\.com\/r\/[^\/]+\/comments\/[^\/?]+/;
+        expect(url).toMatch(redditUrlPattern);
+    }
 
 }

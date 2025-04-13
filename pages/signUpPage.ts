@@ -6,9 +6,7 @@ export class SignUpPage {
     readonly signUpHeader: Locator;
     readonly googleText: Locator;
     readonly emailInputField: Locator;
-    readonly alreadyRedditorText: Locator;
     readonly continueButtonStep1: Locator;
-    readonly continueButtonLable: Locator;
     readonly closeIcon: Locator;
     readonly skipButton: Locator;
     readonly passwordInputField: Locator;
@@ -18,6 +16,7 @@ export class SignUpPage {
     readonly manIdentityButton: Locator;
     readonly feedButton: Locator;
     readonly continueButtonStep3: Locator;
+    readonly personalizeBanner: Locator;
 
     
     
@@ -27,9 +26,7 @@ export class SignUpPage {
     this.signUpHeader = page.getByText(' By continuing, you agree to our ');
     this.googleText = page.locator('#button-label');
     this.emailInputField = page.locator('#register-email input');
-    this.alreadyRedditorText = page.locator('');
     this.continueButtonStep1 = page.locator('[noun="register"] .continue');
-    this.continueButtonLable = page.locator('');
     this.closeIcon = page.locator('#auth-flow-modal-close-btn');
     this.skipButton = page.locator('[name="skip"]');
     this.usernameInputField = page.locator('#register-username input');
@@ -37,8 +34,9 @@ export class SignUpPage {
     this.toastMessage = page.locator('[slot="action"] [icon-name="close-outline"]');
     this.continueButtonStep2 = page.locator('[type="submit"] [class="flex items-center gap-xs"]');
     this.manIdentityButton = page.locator('[value="MALE"]');
-    this.feedButton = page.locator('[class="topic-container]');
-    this.continueButtonStep3 = page.locator('[slot="primaryButton"] [type="submit"]');
+    this.feedButton = page.locator('[class="topic-container"]');
+    this.continueButtonStep3 = page.locator('[slot="primaryButton"] [type="submit"]:not([disabled])');
+    this.personalizeBanner = page.locator('[pagename="onboarding_complete_spinner"]');
     }
 
     async navigate () {
@@ -76,12 +74,12 @@ export class SignUpPage {
     }
 
     async selectAnyFeed () {
-        const feed = this.feedButton.first()
-        await feed.click();
+        await this.feedButton.first().click();
     }
 
     async finalizeRegistration () {
         await this.continueButtonStep3.click();
+        await expect(this.personalizeBanner).toBeVisible();
     }
 
 }
