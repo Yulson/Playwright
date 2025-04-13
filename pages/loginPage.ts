@@ -3,9 +3,6 @@ import { Page, Locator, expect } from '@playwright/test';
 export class LoginPage {
     readonly page: Page;
     readonly redditLogo: Locator;
-    readonly loginHeader: Locator;
-    readonly termsOfUse1: Locator;
-    readonly termsOfUse2: Locator;
     readonly userAgreementLink: Locator;
     readonly privacyPolicyLink: Locator;
     readonly phoneNumberIcon: Locator;
@@ -22,9 +19,6 @@ export class LoginPage {
     constructor(page: Page) {
         this.page = page;
         this.redditLogo = page.locator('[class="hidden s:flex items-center"]');
-        this.loginHeader = page.locator('');
-        this.termsOfUse1 = page.locator('');
-        this.termsOfUse2 = page.locator('');
         this.userAgreementLink = page.locator('a[href="https://www.redditinc.com/policies/user-agreement"]');
         this.privacyPolicyLink = page.locator('a[href="https://www.redditinc.com/policies/privacy-policy"]');
         this.phoneNumberIcon = page.locator('[icon-name="phone-outline"]');
@@ -42,19 +36,20 @@ export class LoginPage {
         await this.page.goto('https://www.reddit.com/login/');
     }
 
-    async clickLoginButton (){
+    async clickLoginButton () {
         await this.loginButton.click()
+        
     }
-    async clickSignUpLink (){
+    async clickSignUpLink () {
         await this.signUpLink.click()
     }
 
-    async enterValidEmail (email: string){
+    async enterValidEmail (email: string) {
         await this.emailInputField.click();
         await this.emailInputField.fill(email);
     }
 
-    async enterValidPassword (password: string){
+    async enterValidPassword (password: string) {
         await this.passwordInputField.fill(password);
     }
 }
