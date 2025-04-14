@@ -119,6 +119,7 @@ When ('User searches for {string} community', { timeout: 15000 }, async function
 When ('Community details page is displayed', async function() {
   this.communityDetailsPage = new CommunityPage(pageFixture.page);
   await this.communityDetailsPage.verifyElementsVisibleCommunityPage();
+  console.log("All Elements are visible on Community details page");
 })
 
 When ('User joins community', async function(){
@@ -136,6 +137,7 @@ When ('User enters existing credentials', { timeout: 15000 }, async function() {
 
 Then ('User deletes account', async function() {
   await this.homePage.clickDelete();
+  console.log("User account is deleted");
 })
 
 
