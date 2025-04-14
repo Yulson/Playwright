@@ -88,12 +88,17 @@ export class HomePage {
     }
 
     async verifyHomePageSignedInAllElementsVisible () {
-        await this.profileIcon.waitFor({ state: 'visible', timeout: 15000 });
+        
         await expect(this.redditLogo).toBeVisible();
         await expect(this.searchIcon).toBeVisible();
+        await this.chatIcon.waitFor();
         await expect(this.chatIcon).toBeVisible();
+        await this.createButton.waitFor();
         await expect(this.createButton).toBeVisible();
+        await this.bellIcon.waitFor();
         await expect(this.bellIcon).toBeVisible();
+        await this.profileIcon.waitFor();
+        await expect(this.profileIcon).toBeVisible();
     }
 
     async clickLoginButton () {

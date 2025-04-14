@@ -79,7 +79,7 @@ export class SignUpPage {
 
     async finalizeRegistration () {
         await this.continueButtonStep3.click();
-        await expect(this.personalizeBanner).toBeVisible();
+        await expect(this.personalizeBanner).toBeVisible({ timeout: 20000 });
     }
 
 }
