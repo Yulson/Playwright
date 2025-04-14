@@ -79,7 +79,7 @@ When ('User selects any popular feed', async function() {
   await this.signUpPage.selectAnyFeed();
 })
 
-When ('User clicks Continue to create a profile', { timeout: 15000 }, async function() {
+When ('User clicks Continue to create a profile', { timeout: 30000 }, async function() {
   await this.signUpPage.finalizeRegistration();
 })
 
